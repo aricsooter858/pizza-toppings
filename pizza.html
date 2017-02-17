@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="pizza_toppings_app">
+  <head>
+    <title>Pizza Toppings App</title>
+    <meta charset="utf-8" />
+     <link href="bootstrap-slate.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div ng-controller="MainController as mc">
+    <nav class="navbar navbar-default">
+    <h1>Pizza Toppings Selector</h1>
+    </nav>
+    <div class="jumbotron">
+    <h3>List of pizzas with toppings</h3>
+    <ul ng-if="mc.pizzas != null">
+      <li ng-repeat="pizza in mc.pizzas"
+      ng-mouseenter="mc.emphasis(true, $event)" 
+		  ng-mouseleave="mc.emphasis(false, $event)"
+		  ng-class="mc.background"
+      id="pizza{{$index}}">
+        
+        {{pizza.topping1.name}}, {{pizza.topping2.name}}, {{pizza.topping3.name}}, {{pizza.topping4.name}}
+        [<label for="remove">Remove</label>
+		<input name="remove" type="checkbox"  ng-click="mc.remove($index)">
+		<input class="btn btn-danger" type="button" value="Edit Order" ng-click="mc.show" ng-hide="mc.show_edit"> ]
+      </li>                                                                                                                         
+    </ul>
+    <div ng-show="mc.show_edit">
+     <p>Topping 1: <select ng-model="mc.pizza_topping1" ng-options="s.name for s in mc.pizza_toppings_options1" ng-bind="pizza_topping1"></select></p></br>
+     <p>Topping 2: <select ng-model="mc.pizza_topping2" ng-options="s.name for s in mc.pizza_toppings_options2" ng-bind="pizza_topping2"></select></p></br>
+     <p>Topping 3: <select ng-model="mc.pizza_topping3" ng-options="s.name for s in mc.pizza_toppings_options3" ng-bind="pizza_topping3"></select></p></br>
+     <p>Topping 4: <select ng-model="mc.pizza_topping4" ng-options="s.name for s in mc.pizza_toppings_options4" ng-bind="pizza_topping4"></select></p></br>
+      <input class="btn btn-success" type="button" value="Update Order" ng-click="mc.update(mc.pizza_topping1, mc.pizza_topping2, mc.pizza_topping3, mc.pizza_topping4)" />
+    </div>
+     <p>Topping 1: <select ng-model="mc.pizza_topping1" ng-options="s.name for s in mc.pizza_toppings_options1"></select></p></br>
+     <p>Topping 2: <select ng-model="mc.pizza_topping2" ng-options="s.name for s in mc.pizza_toppings_options2"></select></p></br>
+     <p>Topping 3: <select ng-model="mc.pizza_topping3" ng-options="s.name for s in mc.pizza_toppings_options3"></select></p></br>
+     <p>Topping 4: <select ng-model="mc.pizza_topping4" ng-options="s.name for s in mc.pizza_toppings_options4"></select></p></br>
+    
+    <input class="btn btn-success" type="button" value="Add Order" ng-click="mc.update(mc.pizza_topping1, mc.pizza_topping2, mc.pizza_topping3, mc.pizza_topping4)" /> 
+    <script src="https://code.angularjs.org/1.6.2/angular.min.js"></script> 
+    <script src="pizza.js"></script>
+    </div>
+    </div>
+  </body>
+</html>
+
